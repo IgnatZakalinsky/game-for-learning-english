@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="22f1a1bc-8239-4151-813e-430c50265094" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Client/Cli.java" afterPath="$PROJECT_DIR$/src/Client/Cli.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Server/CliLis.java" afterPath="$PROJECT_DIR$/src/Server/CliLis.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Server/accs.txt" afterPath="$PROJECT_DIR$/src/Server/accs.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Server/Accs.java" afterPath="$PROJECT_DIR$/src/Server/Accs.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,11 +15,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Accs.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Accs.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Server/Accs.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="13" lean-forward="true" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+            <state relative-caret-position="291">
+              <caret line="51" column="4" lean-forward="false" selection-start-line="51" selection-start-column="4" selection-end-line="51" selection-end-column="4" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -29,7 +27,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="accs.txt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="accs.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Server/accs.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
@@ -42,7 +40,7 @@
       <file leaf-file-name="Cli.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Client/Cli.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1647">
+            <state relative-caret-position="-1800">
               <caret line="9" column="6" lean-forward="false" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -66,8 +64,8 @@
       <file leaf-file-name="UpCli.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Server/UpCli.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="39" column="42" lean-forward="true" selection-start-line="38" selection-start-column="32" selection-end-line="39" selection-end-column="44" />
+            <state relative-caret-position="68">
+              <caret line="25" column="37" lean-forward="true" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -76,7 +74,7 @@
       <file leaf-file-name="CliLis.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Server/CliLis.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
+            <state relative-caret-position="714">
               <caret line="42" column="58" lean-forward="false" selection-start-line="42" selection-start-column="58" selection-end-line="42" selection-end-column="58" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -108,11 +106,11 @@
         <option value="$PROJECT_DIR$/readme.txt" />
         <option value="$PROJECT_DIR$/src/Server/accs.java" />
         <option value="$PROJECT_DIR$/src/Server/UpCli.java" />
-        <option value="$PROJECT_DIR$/src/Server/Accs.java" />
         <option value="$PROJECT_DIR$/src/Server/Serv.java" />
         <option value="$PROJECT_DIR$/src/Client/Cli.java" />
         <option value="$PROJECT_DIR$/src/Server/CliLis.java" />
         <option value="$PROJECT_DIR$/src/Server/accs.txt" />
+        <option value="$PROJECT_DIR$/src/Server/Accs.java" />
       </list>
     </option>
   </component>
@@ -372,7 +370,14 @@
       <option name="project" value="LOCAL" />
       <updated>1507579538146</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="test Cli/Serv">
+      <created>1507582211857</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1507582211857</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -417,7 +422,8 @@
     <MESSAGE value="add threads" />
     <MESSAGE value="add authorization" />
     <MESSAGE value="error" />
-    <option name="LAST_COMMIT_MESSAGE" value="error" />
+    <MESSAGE value="test Cli/Serv" />
+    <option name="LAST_COMMIT_MESSAGE" value="test Cli/Serv" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -456,48 +462,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Server/Accs.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="13" lean-forward="true" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Server/UpCli.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="39" column="42" lean-forward="true" selection-start-line="38" selection-start-column="32" selection-end-line="39" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Server/Serv.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="16" lean-forward="false" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Client/Cli.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1647">
-          <caret line="9" column="6" lean-forward="false" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Server/CliLis.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="42" column="58" lean-forward="false" selection-start-line="42" selection-start-column="58" selection-end-line="42" selection-end-column="58" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -509,6 +477,44 @@
         <state relative-caret-position="153">
           <caret line="9" column="2" lean-forward="false" selection-start-line="9" selection-start-column="2" selection-end-line="9" selection-end-column="2" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Client/Cli.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1800">
+          <caret line="9" column="6" lean-forward="false" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Server/UpCli.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="25" column="37" lean-forward="true" selection-start-line="25" selection-start-column="37" selection-end-line="25" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Server/CliLis.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="42" column="58" lean-forward="false" selection-start-line="42" selection-start-column="58" selection-end-line="42" selection-end-column="58" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Server/Accs.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="51" column="4" lean-forward="false" selection-start-line="51" selection-start-column="4" selection-end-line="51" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
