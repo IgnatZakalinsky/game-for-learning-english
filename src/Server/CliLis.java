@@ -5,12 +5,12 @@ import java.net.Socket;
 
 public class CliLis implements Runnable {
     static int i = 0;
-    BufferedReader in;
-    BufferedWriter out;
-    String sin = "", sinIn = "55";
-    boolean q = true;
-    Thread t;
-    Socket s;
+    volatile BufferedReader in;
+    //volatile BufferedWriter out;
+    volatile String sin = "", sinIn = "55";
+    volatile boolean q = true;
+    volatile Thread t;
+    volatile Socket s;
 
     public CliLis(Socket s) {
         this.s = s;
@@ -23,15 +23,15 @@ public class CliLis implements Runnable {
         System.out.println(t.getName());
         try {
             in = new BufferedReader(new InputStreamReader(s.getInputStream()));
-            out = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
+            //out = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
             sin = in.readLine();
             if ((sin != null) && (sin.equals("regs"))) {
 
-                out.write("+++++++++++++++++");
+                /*out.write("+++++++++++++++++");
                 out.flush();
-                out.flush();
-
-                System.out.println("++++++++");
+                out.write("111");
+                out.flush();*/
+                System.out.print("+");
 
                 regs();
                 while (q) { // listening
@@ -40,6 +40,7 @@ public class CliLis implements Runnable {
                         System.out.println("text:" + sin);
 
                         if ((sin.equals("q")) || (sin == null)) {
+                            System.out.println("disconnect");
                             Serv.accs.acc.remove(sinIn);
                             Serv.accs.accOn.remove(sinIn);
                             s.close();
@@ -48,8 +49,8 @@ public class CliLis implements Runnable {
                     }
                 }
             } else {
-                out.write("q");
-                out.flush();
+                //out.write("q");
+                //out.flush();
                 System.out.println("no client");
                 s.close();
             }
@@ -67,17 +68,16 @@ public class CliLis implements Runnable {
         sin = in.readLine();
         synchronized (Serv.accs) {
             if (Serv.accs.accs.containsKey(sin)) {
-                System.out.println("++");
-                out.write("++");
-                out.flush();
+                //out.write("++");
+                //out.flush();
                 Serv.accs.accOn.put(sin, Serv.accs.accs.get(sin));
                 Serv.accs.acc.put(sin, s);
                 sinIn = sin;
                 System.out.println("[add]");
             } else {
                 System.out.println("non reg: [" + sin + "]");
-                out.write("q");
-                out.flush();
+                //out.write("q");
+                //out.flush();
                 q = false;
             }
         }

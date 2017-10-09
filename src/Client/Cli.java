@@ -7,7 +7,7 @@ import java.net.Socket;
 public class Cli {
     static volatile Socket s;
     static volatile BufferedWriter out;
-    static volatile BufferedReader in;
+    //static volatile BufferedReader in;
     static volatile String te;
     static volatile boolean q = true;
     static volatile byte[] b = new byte[4];
@@ -28,7 +28,7 @@ public class Cli {
         try {
             s = new Socket(InetAddress.getByAddress(b), 5050); //connect
             out = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
-            in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+            //in = new BufferedReader(new InputStreamReader(s.getInputStream()));
         } catch (IOException e) {
             System.out.println("!Сервер отключён!");
             System.out.println("повторная попытка подключения через 10с...");
@@ -44,7 +44,7 @@ public class Cli {
                 try {
                     s = new Socket(InetAddress.getByAddress(b), 5050); //connect
                     out = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
-                    in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+                    //in = new BufferedReader(new InputStreamReader(s.getInputStream()));
                     qq = false;
                 } catch (IOException e2) {
                     System.out.println("!Сервер отключён!");
@@ -77,16 +77,16 @@ public class Cli {
                 out.write(s() + "\n");
                 out.flush();
                 System.out.println("[flush]");
-                te = in.readLine();
+                /*te = in.readLine();
                 System.out.println(te);
-                if (te.equals("q")) q = false;
+                if (te.equals("q")) q = false;*/
             } catch (Exception e3) {
                 System.out.println("!Сервер отключён!");
                 System.out.println("подключаюсь...");
                 try {
                     s = new Socket(InetAddress.getByAddress(b), 5050); //connect
                     out = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
-                    in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+                    //in = new BufferedReader(new InputStreamReader(s.getInputStream()));
                 } catch (IOException e) {
                     System.out.println("!Сервер отключён!");
                     System.out.println("повторная попытка подключения через 10с...");
@@ -101,7 +101,7 @@ public class Cli {
                         try {
                             s = new Socket(InetAddress.getByAddress(b), 5050); //connect
                             out = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
-                            in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+                            //in = new BufferedReader(new InputStreamReader(s.getInputStream()));
                             qq = false;
                         } catch (IOException e2) {
                             System.out.println("!Сервер отключён!");
