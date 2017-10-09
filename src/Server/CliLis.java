@@ -1,9 +1,15 @@
 package Server;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.Socket;
 
 public class CliLis implements Runnable {
     static int i = 0;
+    BufferedReader in;
+    String sin = "";
+    boolean q = true;
     Thread t;
     Socket s;
 
@@ -15,33 +21,41 @@ public class CliLis implements Runnable {
 
     @Override
     public void run() {
+        try {
+            in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+            sin = in.readLine();
+            if (sin.equals("regs")) {
+                regs();
+            }
 
-        /*
-            BufferedReader in;
-            boolean q = true;
-            String sin = "";
+            while (q) { // listening
+                sin = in.readLine();
+                synchronized (Serv.accs) {
+                    System.out.println("text:" + sin);
 
-
-
-                try {
-                    in = new BufferedReader(new InputStreamReader(s.getInputStream()));
-                    sin = in.readLine();
-
-                    if(sin.equals("regs") { regs(); }
-
-                    while (q) {
-                    synchronized (lock) {
-                        Serv.at.add(t); // добавление в историю
-
-                        System.out.println(t);
-
-                        Serv.change = true; // оповещение о изменении
-
-                        if ((sin.equals("q")) || (sin == null)) q = false;
+                    if ((sin.equals("q")) || (sin == null)) {
+                        q = false;
+                        sin = Serv.accs.acc.get(s);
+                        Serv.accs.acc.remove(sin);
+                        Serv.accs.accOn.remove(sin);
                     }
-                    }
-                } catch (java.io.IOException e) { e.printStackTrace(); }
+                }
+            }
+        } catch (java.io.IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-                */
+    private void regs() throws IOException {
+        sin = in.readLine();
+        synchronized (Serv.accs) {
+            if (Serv.accs.accs.containsKey(sin)) {
+                Serv.accs.accOn.put(sin, Serv.accs.accs.get(sin));
+                Serv.accs.acc.put(s, sin);
+            } else {
+                System.out.println("non reg: [" + sin + "]");
+                q = false;
+            }
+        }
     }
 }
