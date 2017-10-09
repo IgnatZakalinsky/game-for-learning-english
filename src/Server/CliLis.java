@@ -1,14 +1,13 @@
 package Server;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.Socket;
 
 public class CliLis implements Runnable {
     static int i = 0;
     BufferedReader in;
-    String sin = "";
+    BufferedWriter out;
+    String sin = "", sinIn = "55";
     boolean q = true;
     Thread t;
     Socket s;
@@ -21,28 +20,46 @@ public class CliLis implements Runnable {
 
     @Override
     public void run() {
+        System.out.println(t.getName());
         try {
             in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+            out = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
             sin = in.readLine();
-            if (sin.equals("regs")) {
+            if ((sin != null) && (sin.equals("regs"))) {
+
+                out.write("+++++++++++++++++");
+                out.flush();
+                out.flush();
+
+                System.out.println("++++++++");
+
                 regs();
-            }
+                while (q) { // listening
+                    sin = in.readLine();
+                    synchronized (Serv.accs) {
+                        System.out.println("text:" + sin);
 
-            while (q) { // listening
-                sin = in.readLine();
-                synchronized (Serv.accs) {
-                    System.out.println("text:" + sin);
-
-                    if ((sin.equals("q")) || (sin == null)) {
-                        q = false;
-                        sin = Serv.accs.acc.get(s);
-                        Serv.accs.acc.remove(sin);
-                        Serv.accs.accOn.remove(sin);
+                        if ((sin.equals("q")) || (sin == null)) {
+                            Serv.accs.acc.remove(sinIn);
+                            Serv.accs.accOn.remove(sinIn);
+                            s.close();
+                            q = false;
+                        }
                     }
                 }
+            } else {
+                out.write("q");
+                out.flush();
+                System.out.println("no client");
+                s.close();
             }
         } catch (java.io.IOException e) {
-            e.printStackTrace();
+            if (e.toString().equals("java.net.SocketException: Connection reset")) {
+                System.out.println("Connection reset");
+            } else {
+                e.printStackTrace();
+                System.out.println("error from listen");
+            }
         }
     }
 
@@ -50,10 +67,17 @@ public class CliLis implements Runnable {
         sin = in.readLine();
         synchronized (Serv.accs) {
             if (Serv.accs.accs.containsKey(sin)) {
+                System.out.println("++");
+                out.write("++");
+                out.flush();
                 Serv.accs.accOn.put(sin, Serv.accs.accs.get(sin));
-                Serv.accs.acc.put(s, sin);
+                Serv.accs.acc.put(sin, s);
+                sinIn = sin;
+                System.out.println("[add]");
             } else {
                 System.out.println("non reg: [" + sin + "]");
+                out.write("q");
+                out.flush();
                 q = false;
             }
         }

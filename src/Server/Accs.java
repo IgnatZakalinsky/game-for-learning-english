@@ -9,7 +9,7 @@ import java.util.TreeMap;
 
 final class Accs {
     TreeMap<String, ArrayList<String>> accs = new TreeMap<>();
-    TreeMap<Socket, String> acc = new TreeMap<>();
+    TreeMap<String, Socket> acc = new TreeMap<>();
     TreeMap<String, ArrayList<String>> accOn = new TreeMap<>();
 
     Accs() {
