@@ -76,6 +76,7 @@ public class CliLis implements Runnable {
                 System.out.println("[add]");
             } else {
                 System.out.println("non reg: [" + sin + "]");
+                s.close();
                 //out.write("q");
                 //out.flush();
                 q = false;

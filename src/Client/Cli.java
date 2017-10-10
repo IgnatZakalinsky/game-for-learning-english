@@ -10,6 +10,7 @@ public class Cli {
     static volatile BufferedWriter out;
     //static volatile BufferedReader in;
     static volatile String[] setts = new String[10];
+    static volatile RegWindow rw;
     static volatile boolean q = true;
     static byte[] bip = new byte[4];
 
@@ -17,29 +18,32 @@ public class Cli {
         //load settings
         load();
         //init connect
-        RegWindow rw = new RegWindow();
+        rw = new RegWindow();
         try {
             System.out.println("ждём...");
             rw.t.join(); // ждёт пока завершиться t поток
         } catch (InterruptedException e) {
             System.out.println("ошибка ожидания: " + e);
         }
+        rw = null;
 
 
         //connect
-        System.out.println("подключаюсь...");
-        try {
-            s = new Socket(InetAddress.getByAddress(bip), 5050); //connect
-            out = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
-            //in = new BufferedReader(new InputStreamReader(s.getInputStream()));
-            out.write(setts[0] + "\n");
-            out.flush();
-            out.write(setts[1] + "\n");
-            out.flush();
-        } catch (IOException e) {
-            connect();
+        if (q) {
+            System.out.println("подключаюсь...");
+            try {
+                s = new Socket(InetAddress.getByAddress(bip), 5050); //connect
+                out = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
+                //in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+                out.write(setts[0] + "\n");
+                out.flush();
+                out.write(setts[1] + "\n");
+                out.flush();
+            } catch (IOException e) {
+                connect();
+            }
+            System.out.println("Готово!");
         }
-        System.out.println("Готово!");
 
         //start window
         while (q) {
@@ -99,13 +103,24 @@ public class Cli {
             }
             System.out.println("подключаюсь...");
             try {
-                s = new Socket(InetAddress.getByAddress(bip), 5050); //connect
-                out = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
-                //in = new BufferedReader(new InputStreamReader(s.getInputStream()));
-                out.write(setts[0] + "\n");
-                out.flush();
-                out.write(setts[1] + "\n");
-                out.flush();
+                rw = new RegWindow();
+                try {
+                    System.out.println("ждём...");
+                    rw.t.join(); // ждёт пока завершиться t поток
+                } catch (InterruptedException e) {
+                    System.out.println("ошибка ожидания: " + e);
+                }
+                rw = null;
+
+                if (q) {
+                    s = new Socket(InetAddress.getByAddress(bip), 5050); //connect
+                    out = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
+                    //in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+                    out.write(setts[0] + "\n");
+                    out.flush();
+                    out.write(setts[1] + "\n");
+                    out.flush();
+                }
                 qq = false;
             } catch (IOException e2) {
                 System.out.println("!Сервер отключён!");
