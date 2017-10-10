@@ -3,60 +3,106 @@ package Client;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.LinkedList;
 
 public class Cli {
     static volatile Socket s;
     static volatile BufferedWriter out;
     //static volatile BufferedReader in;
-    static volatile String te;
+    static volatile String[] setts = new String[10];
     static volatile boolean q = true;
-    static volatile byte[] b = new byte[4];
+    static byte[] bip = new byte[4];
 
     public static void main(String[] args) {
         //load settings
-        int i[] = {178, 124, 163, 77}; // real IP
-        b[0] = (byte) i[0];
-        b[1] = (byte) i[1];
-        b[2] = (byte) i[2];
-        b[3] = (byte) i[3];
-        // {-78, 124, -93, 77} server IP
-
+        load();
         //init connect
+
 
         //connect
         System.out.println("подключаюсь...");
         try {
-            s = new Socket(InetAddress.getByAddress(b), 5050); //connect
+            s = new Socket(InetAddress.getByAddress(bip), 5050); //connect
             out = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
             //in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+            out.write(setts[0] + "\n");
+            out.flush();
+            out.write(setts[1] + "\n");
+            out.flush();
         } catch (IOException e) {
-            System.out.println("!Сервер отключён!");
-            System.out.println("повторная попытка подключения через 10с...");
-            boolean qq = true;
-            while (qq) {
-                try {
-                    Thread.sleep(10000);
-                } catch (InterruptedException e1) {
-                    e.printStackTrace();
-                }
-
-                System.out.println("подключаюсь...");
-                try {
-                    s = new Socket(InetAddress.getByAddress(b), 5050); //connect
-                    out = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
-                    //in = new BufferedReader(new InputStreamReader(s.getInputStream()));
-                    qq = false;
-                } catch (IOException e2) {
-                    System.out.println("!Сервер отключён!");
-                    System.out.println("повторная попытка подключения через 10с...");
-                }
-            }
+            connect();
         }
         System.out.println("Готово!");
 
         //start window
         while (q) {
             tIn(); // для пополнения истории
+        }
+    }
+
+    private static void load() {
+        LinkedList<Byte> b = new LinkedList<>();
+        FileInputStream fin;
+        try {
+            fin = new FileInputStream("src\\Client\\saveSettings.txt");
+            do {
+                b.add((byte) fin.read()); // побайтовое чтение
+            } while (b.getLast() != -1);
+            fin.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        b.removeLast();
+        byte[] b2 = new byte[b.size()];
+        int i = 0, j;
+        for (byte b3 : b) {
+            b2[i++] = b3;
+        }
+        String st = new String(b2);
+        String[] ss = st.split("\r\n");
+        for (String s0 : ss) System.out.println("[" + s0 + "]");
+        int ip[] = new int[4]; // real IP 178.124.163.77
+        try {
+            ip[0] = Integer.parseInt(ss[0]);
+            ip[1] = Integer.parseInt(ss[1]);
+            ip[2] = Integer.parseInt(ss[2]);
+            ip[3] = Integer.parseInt(ss[3]);
+            bip[0] = (byte) ip[0];
+            bip[1] = (byte) ip[1];
+            bip[2] = (byte) ip[2];
+            bip[3] = (byte) ip[3]; // {-78, 124, -93, 77} server IP
+            j = Integer.parseInt(ss[4]);
+            System.arraycopy(ss, 5, setts, 0, j);
+        } catch (Exception e) {
+            System.out.println(e + "\nfile saveSettings.txt is corrupted");
+        }
+        for (String ii : setts) System.out.println("{" + ii + "}");
+    }
+
+    private static void connect() {
+        System.out.println("!Сервер отключён!");
+        System.out.println("повторная попытка подключения через 10с...");
+        boolean qq = true;
+        while (qq) {
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e1) {
+                e1.printStackTrace();
+            }
+            System.out.println("подключаюсь...");
+            try {
+                s = new Socket(InetAddress.getByAddress(bip), 5050); //connect
+                out = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
+                //in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+                out.write(setts[0] + "\n");
+                out.flush();
+                out.write(setts[1] + "\n");
+                out.flush();
+                qq = false;
+            } catch (IOException e2) {
+                System.out.println("!Сервер отключён!");
+                System.out.println("повторная попытка подключения через 10с...");
+            }
         }
     }
 
@@ -67,7 +113,9 @@ public class Cli {
             ss = is.readLine();
             if (ss.length() == 0) return " ";
             if (ss.equals("q")) q = false;
-        } catch (IOException e) { System.out.println("Error in: " + e); }
+        } catch (IOException e) {
+            System.out.println("Error in: " + e);
+        }
         return ss;
     }
 
@@ -77,42 +125,11 @@ public class Cli {
                 out.write(s() + "\n");
                 out.flush();
                 System.out.println("[flush]");
-                /*te = in.readLine();
-                System.out.println(te);
-                if (te.equals("q")) q = false;*/
             } catch (Exception e3) {
-                System.out.println("!Сервер отключён!");
-                System.out.println("подключаюсь...");
-                try {
-                    s = new Socket(InetAddress.getByAddress(b), 5050); //connect
-                    out = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
-                    //in = new BufferedReader(new InputStreamReader(s.getInputStream()));
-                } catch (IOException e) {
-                    System.out.println("!Сервер отключён!");
-                    System.out.println("повторная попытка подключения через 10с...");
-                    boolean qq = true;
-                    while (qq) {
-                        try {
-                            Thread.sleep(10000);
-                        } catch (InterruptedException e1) {
-                            e.printStackTrace();
-                        }
-                        System.out.println("подключаюсь...");
-                        try {
-                            s = new Socket(InetAddress.getByAddress(b), 5050); //connect
-                            out = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
-                            //in = new BufferedReader(new InputStreamReader(s.getInputStream()));
-                            qq = false;
-                        } catch (IOException e2) {
-                            System.out.println("!Сервер отключён!");
-                            System.out.println("повторная попытка подключения через 10с...");
-                        }
-                    }
-                }
+                connect();
                 System.out.println("Готово!");
             }
             if (!q) s.close();
-            //System.out.println("go");
         } catch (IOException e) {
             e.printStackTrace();
         }

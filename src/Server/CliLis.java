@@ -51,7 +51,7 @@ public class CliLis implements Runnable {
             } else {
                 //out.write("q");
                 //out.flush();
-                System.out.println("no client");
+                System.out.println("no client = " + sin);
                 s.close();
             }
         } catch (java.io.IOException e) {
