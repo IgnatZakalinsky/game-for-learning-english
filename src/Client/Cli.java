@@ -17,6 +17,13 @@ public class Cli {
         //load settings
         load();
         //init connect
+        RegWindow rw = new RegWindow();
+        try {
+            System.out.println("ждём...");
+            rw.t.join(); // ждёт пока завершиться t поток
+        } catch (InterruptedException e) {
+            System.out.println("ошибка ожидания: " + e);
+        }
 
 
         //connect
@@ -38,6 +45,7 @@ public class Cli {
         while (q) {
             tIn(); // для пополнения истории
         }
+        System.exit(0);
     }
 
     private static void load() {
