@@ -11,6 +11,7 @@ public class Cli {
     //static volatile BufferedReader in;
     static volatile String[] setts = new String[10];
     static volatile RegWindow rw;
+    static volatile GameWindow gw;
     static volatile boolean q = true;
     static byte[] bip = new byte[4];
 
@@ -46,6 +47,8 @@ public class Cli {
         }
 
         //start window
+        gw = new GameWindow();
+
         while (q) {
             tIn(); // для пополнения истории
         }

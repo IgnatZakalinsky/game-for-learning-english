@@ -39,7 +39,7 @@ public class CliLis implements Runnable {
                     synchronized (Serv.accs) {
                         System.out.println("text:" + sin);
 
-                        if ((sin.equals("q")) || (sin == null)) {
+                        if ((sin == null) || (sin.equals("q"))) {
                             System.out.println("disconnect");
                             Serv.accs.acc.remove(sinIn);
                             Serv.accs.accOn.remove(sinIn);
