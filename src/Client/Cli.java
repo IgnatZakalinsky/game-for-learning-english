@@ -47,7 +47,8 @@ public class Cli {
         }
 
         //start window
-        gw = new GameWindow();
+        Key k = new Key();
+        gw = new GameWindow(k);
 
         while (q) {
             tIn(); // для пополнения истории

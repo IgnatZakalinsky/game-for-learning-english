@@ -9,12 +9,16 @@ import java.io.File;
 import java.io.IOException;
 
 public class GameWindow extends Frame implements WindowListener, Runnable {
-    int x = -300, y = -300;
+    Key k;
+    static int x = -300, y = -300;
     boolean q = true;
     Thread t;
     volatile private static BufferedImage b2 = new BufferedImage(800, 600, 1);
 
-    GameWindow() {
+    GameWindow(Key k) {
+        this.k = k;
+        addKeyListener(k);
+        k.reg(this);
         addWindowListener(this);
         setSize(800, 600);
         setTitle("Game");
