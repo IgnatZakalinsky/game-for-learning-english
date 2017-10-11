@@ -51,7 +51,11 @@ public class Cli {
         gw = new GameWindow(k);
 
         while (q) {
-            tIn(); // для пополнения истории
+            try {
+                Thread.sleep(20);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         System.exit(0);
     }
@@ -133,25 +137,11 @@ public class Cli {
         }
     }
 
-    private static String s() { //временная функция ввода из консоли
-        String ss = null;
-        try {
-            BufferedReader is = new BufferedReader(new InputStreamReader(System.in));
-            ss = is.readLine();
-            if (ss.length() == 0) return " ";
-            if (ss.equals("q")) q = false;
-        } catch (IOException e) {
-            System.out.println("Error in: " + e);
-        }
-        return ss;
-    }
-
-    public static void tIn() { //для пополнения истории
+    public static void tIn(String sx) { //для пополнения истории
         try {
             try {
-                out.write(s() + "\n");
+                out.write(sx + "\n");
                 out.flush();
-                System.out.println("[flush]");
             } catch (Exception e3) {
                 connect();
                 System.out.println("Готово!");

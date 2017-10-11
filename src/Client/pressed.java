@@ -5,6 +5,7 @@ public class pressed implements Runnable {
     Thread t;
     GameWindow gw;
     volatile boolean ex = false, ey = false, e_y = false, e_x = false;
+    boolean q = false;
 
     pressed(GameWindow gw) {
         this.gw = gw;
@@ -15,10 +16,28 @@ public class pressed implements Runnable {
     @Override
     public void run() {
         while (true) {
-            if (ey) GameWindow.y += STEP;
-            if (e_y) GameWindow.y -= STEP;
-            if (ex) GameWindow.x += STEP;
-            if (e_x) GameWindow.x -= STEP;
+            if (ey) {
+                GameWindow.y += STEP;
+                q = true;
+            }
+            if (e_y) {
+                GameWindow.y -= STEP;
+                q = true;
+            }
+            if (ex) {
+                GameWindow.x += STEP;
+                q = true;
+            }
+            if (e_x) {
+                GameWindow.x -= STEP;
+                q = true;
+            }
+
+            if (q) {
+                Cli.tIn(String.valueOf(GameWindow.x));
+                Cli.tIn(String.valueOf(GameWindow.y));
+                q = false;
+            }
 
             try {
                 Thread.sleep(50);
