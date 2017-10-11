@@ -1,24 +1,20 @@
 package Client;
 
-import java.awt.event.KeyEvent;
-
 public class pressed implements Runnable {
-    static int i = 0;
     final int STEP = 5;
     Thread t;
     GameWindow gw;
     volatile boolean ex = false, ey = false, e_y = false, e_x = false;
-    boolean q = true;
 
     pressed(GameWindow gw) {
         this.gw = gw;
-        t = new Thread(this, "pressed" + ++i);
+        t = new Thread(this, "pressed");
         t.start();
     }
 
     @Override
     public void run() {
-        while (q) {
+        while (true) {
             if (ey) GameWindow.y += STEP;
             if (e_y) GameWindow.y -= STEP;
             if (ex) GameWindow.x += STEP;
@@ -30,7 +26,6 @@ public class pressed implements Runnable {
                 e1.printStackTrace();
             }
         }
-        //q = true;
     }
 
     void setE(char e, boolean p) {
