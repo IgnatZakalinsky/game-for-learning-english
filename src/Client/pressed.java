@@ -36,9 +36,9 @@ public class pressed implements Runnable {
 
                 if (q) {
                     Cli.tIn("x");
-                    Cli.tIn(String.valueOf((GameWindow.x * (-1)) + 400));
+                    Cli.tIn(String.valueOf(GameWindow.x));
                     Cli.tIn("y");
-                    Cli.tIn(String.valueOf((GameWindow.y * (-1)) + 300));
+                    Cli.tIn(String.valueOf(GameWindow.y));
                     q = false;
                 }
 

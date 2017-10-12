@@ -7,6 +7,7 @@ import java.awt.event.WindowListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class GameWindow extends Frame implements WindowListener, Runnable {
     Key k;
@@ -91,8 +92,23 @@ public class GameWindow extends Frame implements WindowListener, Runnable {
             g2d = (Graphics2D) b2.getGraphics();
 
             //g2d.rotate(Math.PI / 50 * s.a, s.x + 75, s.y + 75);
-            g2d.drawImage(bi, x, y, 1600, 1600, null);
+
+            int xx = 0, yy = 0;
+            for (ArrayList<String> as : Cli.aa) {
+                if (as.get(1).equals(Cli.setts[2])) {
+                    try {
+                        xx = Integer.parseInt(as.get(2));
+                        yy = Integer.parseInt(as.get(3));
+                    } catch (NumberFormatException nne) {
+                        nne.printStackTrace();
+                    }
+                    g2d.drawImage(bi, xx, yy, 1600, 1600, null);
+                    GameWindow.x = xx;
+                    GameWindow.y = yy;
+                }
+            }
             g2d.drawImage(gg, 370, 270, 60, 60, null);
+
 
             try {
                 Thread.sleep(20);

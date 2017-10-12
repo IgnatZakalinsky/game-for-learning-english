@@ -32,7 +32,7 @@ public class tOut extends Thread { // класс отображающий ист
             try {
                 if (in != null) {
                     ti = in.readLine();
-                    System.out.println(ti);
+                    //System.out.println(ti);
                     aas = new ArrayList<>();
                     i = 0;
                     try {
@@ -50,6 +50,16 @@ public class tOut extends Thread { // класс отображающий ист
                     }
 
                     Cli.aa = aas;
+                    for (ArrayList<String> aaa : aas) {
+                        if (aaa.get(1).equals(Cli.setts[2])) {
+                            try {
+                                GameWindow.x = Integer.parseInt(aaa.get(2));
+                                GameWindow.y = Integer.parseInt(aaa.get(3));
+                            } catch (NumberFormatException nne) {
+                                nne.printStackTrace();
+                            }
+                        }
+                    }
                 }
             } catch (IOException e) {
                 System.out.println("c in tOut");
