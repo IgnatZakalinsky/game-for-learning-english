@@ -3,9 +3,11 @@ package Client;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Cli {
+    static volatile ArrayList<ArrayList<String>> aa = new ArrayList<>();
     static volatile Socket s;
     static volatile boolean tryConnect = false;
     static volatile BufferedWriter out;

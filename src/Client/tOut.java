@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class tOut extends Thread { // класс отображающий историю
     Thread t;
@@ -16,18 +17,40 @@ public class tOut extends Thread { // класс отображающий ист
     }
 
     public void run() {
+        String ti;
         BufferedReader in = null;
-        //int i;
+        ArrayList<ArrayList<String>> aas;
+        int i;
         try {
             in = new BufferedReader(new InputStreamReader(s.getInputStream()));
-            //i = Integer.parseInt(in.readLine());
+
 
         } catch (IOException e) {
             e.printStackTrace();
         }
         while (true) {
             try {
-                if (in != null) System.out.println(in.readLine());
+                if (in != null) {
+                    ti = in.readLine();
+                    System.out.println(ti);
+                    aas = new ArrayList<>();
+                    i = 0;
+                    try {
+                        i = Integer.parseInt(ti);
+                    } catch (NumberFormatException ne) {
+                        System.out.println("--NFE--" + ne);
+                    }
+
+                    for (int x = 0; x < i; x++) {
+                        aas.add(new ArrayList<String>());
+                        for (int y = 0; y < 5; y++) {
+                            aas.get(x).add(in.readLine());
+                            //System.out.println(x + ":" + y);
+                        }
+                    }
+
+                    Cli.aa = aas;
+                }
             } catch (IOException e) {
                 System.out.println("c in tOut");
                 Cli.connect();
