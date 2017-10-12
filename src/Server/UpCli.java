@@ -1,6 +1,12 @@
 package Server;
 
-public class UpCli implements Runnable{
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.net.Socket;
+import java.util.ArrayList;
+
+public class UpCli implements Runnable {
     Thread t;
 
     UpCli() {
@@ -11,59 +17,48 @@ public class UpCli implements Runnable{
     @Override
     public void run() {
 
-        /*
 
-    public static class ClassServ extends Thread { // класс для парралельного оповещение клиентов о изменении истории
-        public ClassServ() {
-            start();
-        }
+        BufferedWriter out;
+        boolean i;
 
-        public void run() {
-            BufferedWriter out;
-            boolean i;
-
-            while (true) {
-                synchronized (lock) {
-                    i = change;
-                }
+        while (true) {
+            synchronized (Serv.accs) {
+                i = Serv.accs.change;
+            }
 
 
-                if (i) {
+            if (i) {
 
-                    synchronized (lock) {
+                synchronized (Serv.accs) {
 
-                        for (Socket s : as) { // перебор подключений
+                    for (Socket s : Serv.accs.acc.values()) { // перебор подключений
 
-                            try {
-                                out = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
-                                out.write(at.size() + "\n");
-                                out.flush();
-                                for (String s2 : at) { // отправка всей истории
-                                    out.write(s2 + "\n");
+                        try {
+                            out = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
+                            out.write(Serv.accs.acc.values().size() + "\n");
+                            System.out.println("size:" + Serv.accs.acc.values().size());
+                            out.flush();
+                            for (ArrayList<String> s2 : Serv.accs.accOn.values()) { // отправка всей истории
+                                for (String s3 : s2) {
+                                    out.write(s3 + "\n");
+                                    System.out.println("flush:" + s3);
                                     out.flush();
                                 }
-                            } catch (IOException e) {
-                                //e.printStackTrace();
                             }
-
-                            //s.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
-                        change = false;
                     }
+                    Serv.accs.change = false;
                 }
+            }
 
-                try {
-                    Thread.sleep(10);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
 
         }
-    }
-
-    }*/
-
     }
 }

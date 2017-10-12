@@ -51,6 +51,7 @@ public class CliLis implements Runnable {
                             ent = false;
                         } else {
                             ent = true;
+                            Serv.accs.change = true;
                             if (com.equals("x")) Serv.accs.accOn.get(sinIn).set(2, sin);
                             else if (com.equals("y")) Serv.accs.accOn.get(sinIn).set(3, sin);
 

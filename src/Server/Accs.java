@@ -11,6 +11,7 @@ final class Accs {
     TreeMap<String, ArrayList<String>> accs = new TreeMap<>();
     TreeMap<String, Socket> acc = new TreeMap<>();
     TreeMap<String, ArrayList<String>> accOn = new TreeMap<>();
+    boolean change = false;
 
     Accs() {
         //read file
@@ -49,4 +50,4 @@ final class Accs {
 
     }
 
-} //
+}
