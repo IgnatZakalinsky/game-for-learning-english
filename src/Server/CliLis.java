@@ -89,6 +89,7 @@ public class CliLis implements Runnable {
                 Serv.accs.acc.put(sin, s);
                 sinIn = sin;
                 System.out.println("[add]");
+                Serv.accs.change = true;
             } else {
                 System.out.println("non reg: [" + sin + "]");
                 s.close();
