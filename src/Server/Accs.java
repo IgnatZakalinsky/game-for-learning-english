@@ -37,7 +37,7 @@ final class Accs {
             i = Integer.parseInt(ss[0]);
             for (int ac = 0; ac < i; ac++) {
                 ArrayList<String> ap = new ArrayList<>();
-                for (int p = 0; p < 3; p++) {
+                for (int p = 0; p < 5; p++) {
                     ap.add(ss[j++]);
                     System.out.print(":" + ss[j - 1]);
                 }

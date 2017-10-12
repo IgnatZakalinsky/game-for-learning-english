@@ -34,18 +34,32 @@ public class CliLis implements Runnable {
                 System.out.print("+");
 
                 regs();
+                boolean ent = true;
+                String com = "";
                 while (q) { // listening
                     sin = in.readLine();
                     synchronized (Serv.accs) {
-                        System.out.println("text:" + sin);
-
+                        //System.out.println("text:" + sin);
                         if ((sin == null) || (sin.equals("q"))) {
                             System.out.println("disconnect");
                             Serv.accs.acc.remove(sinIn);
                             Serv.accs.accOn.remove(sinIn);
                             s.close();
                             q = false;
+                        } else if (ent) {
+                            com = sin;
+                            ent = false;
+                        } else {
+                            ent = true;
+                            if (com.equals("x")) Serv.accs.accOn.get(sinIn).set(2, sin);
+                            else if (com.equals("y")) Serv.accs.accOn.get(sinIn).set(3, sin);
+
+                            for (String sx : Serv.accs.accOn.get(sinIn))
+                                System.out.print(":" + sx + ":");
+                            System.out.println();
                         }
+
+
                     }
                 }
             } else {

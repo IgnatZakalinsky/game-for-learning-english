@@ -91,7 +91,7 @@ public class GameWindow extends Frame implements WindowListener, Runnable {
             g2d = (Graphics2D) b2.getGraphics();
 
             //g2d.rotate(Math.PI / 50 * s.a, s.x + 75, s.y + 75);
-            g2d.drawImage(bi, x, y, 1300, 1300, null);
+            g2d.drawImage(bi, x, y, 1600, 1600, null);
             g2d.drawImage(gg, 370, 270, 60, 60, null);
 
             try {
