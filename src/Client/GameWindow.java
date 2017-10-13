@@ -80,10 +80,11 @@ public class GameWindow extends Frame implements WindowListener, Runnable {
     private void go() {
         while (q) {
             //temp const
-            BufferedImage bi = null, gg = null;
+            BufferedImage bi = null, gg = null, ggm = null;
             try {
                 bi = ImageIO.read(new File("src\\Client\\local1.jpg"));
                 gg = ImageIO.read(new File("src\\Client\\gg.png"));
+                ggm = ImageIO.read(new File("src\\Client\\ggm.png"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -93,7 +94,7 @@ public class GameWindow extends Frame implements WindowListener, Runnable {
 
             //g2d.rotate(Math.PI / 50 * s.a, s.x + 75, s.y + 75);
 
-            int xx = 0, yy = 0;
+            int xx = 0, yy = 0, xx1 = 0, yy1 = 0;
             for (ArrayList<String> as : Cli.aa) {
                 if (as.get(1).equals(Cli.setts[2])) {
                     try {
@@ -105,9 +106,19 @@ public class GameWindow extends Frame implements WindowListener, Runnable {
                     g2d.drawImage(bi, xx, yy, 1600, 1600, null);
                     GameWindow.x = xx;
                     GameWindow.y = yy;
+                } else {
+                    try {
+                        xx1 = Integer.parseInt(as.get(2));
+                        yy1 = Integer.parseInt(as.get(3));
+                    } catch (NumberFormatException nne) {
+                        nne.printStackTrace();
+                    }
+                    System.out.println("draw:" + (370 + xx - xx1) + ":" + (270 + yy - yy1));
+                    g2d.drawImage(gg, 370 + xx - xx1, 270 + yy - yy1, 60, 60, null);
+
                 }
             }
-            g2d.drawImage(gg, 370, 270, 60, 60, null);
+            g2d.drawImage(ggm, 370, 270, 60, 60, null);
 
 
             try {
