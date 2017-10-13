@@ -106,7 +106,10 @@ public class GameWindow extends Frame implements WindowListener, Runnable {
                     g2d.drawImage(bi, xx, yy, 1600, 1600, null);
                     GameWindow.x = xx;
                     GameWindow.y = yy;
-                } else {
+                }
+            }
+            for (ArrayList<String> as : Cli.aa) {
+                if (!as.get(1).equals(Cli.setts[2])) {
                     try {
                         xx1 = Integer.parseInt(as.get(2));
                         yy1 = Integer.parseInt(as.get(3));
