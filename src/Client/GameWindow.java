@@ -113,7 +113,7 @@ public class GameWindow extends Frame implements WindowListener, Runnable {
                     } catch (NumberFormatException nne) {
                         nne.printStackTrace();
                     }
-                    System.out.println("draw:" + (370 + xx - xx1) + ":" + (270 + yy - yy1));
+                    //System.out.println("draw:" + (370 + xx - xx1) + ":" + (270 + yy - yy1));
                     g2d.drawImage(gg, 370 + xx - xx1, 270 + yy - yy1, 60, 60, null);
 
                 }
