@@ -30,6 +30,7 @@ public class Cli {
             System.out.println("ошибка ожидания: " + e);
         }
         rw = null;
+        System.out.println(":" + setts[0] + ":" + setts[1] + ":" + setts[2]);
 
 
         //connect
@@ -43,6 +44,8 @@ public class Cli {
                 out.write(setts[0] + "\n");
                 out.flush();
                 out.write(setts[1] + "\n");
+                out.flush();
+                out.write(setts[2] + "\n");
                 out.flush();
                 tryConnect = false;
                 System.out.println("Готово!");
@@ -138,6 +141,8 @@ public class Cli {
                         out.write(setts[0] + "\n");
                         out.flush();
                         out.write(setts[1] + "\n");
+                        out.flush();
+                        out.write(setts[2] + "\n");
                         out.flush();
                     }
                     qq = false;

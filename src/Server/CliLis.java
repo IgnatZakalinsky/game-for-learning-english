@@ -78,20 +78,25 @@ public class CliLis implements Runnable {
 
     private void regs() throws IOException {
         sin = in.readLine();
+        System.out.print("::" + sin + ": ");
         synchronized (Serv.accs) {
             if (Serv.accs.accs.containsKey(sin)) {
-                //out.write("++");
-                //out.flush();
-                Serv.accs.accOn.put(sin, Serv.accs.accs.get(sin));
-                Serv.accs.acc.put(sin, s);
-                sinIn = sin;
-                System.out.println("[add]");
-                Serv.accs.change = true;
+                sinIn = in.readLine();
+                System.out.print(":" + Serv.accs.accs.get(sin).get(1) + "-" + sinIn + ":");
+                if (Serv.accs.accs.get(sin).get(1).equals(sinIn)) {
+                    Serv.accs.accOn.put(sin, Serv.accs.accs.get(sin));
+                    Serv.accs.acc.put(sin, s);
+                    sinIn = sin;
+                    System.out.println("[add]");
+                    Serv.accs.change = true;
+                } else{
+                    System.out.println("non reg: [" + sinIn + "]");
+                    s.close();
+                    q = false;
+                }
             } else {
                 System.out.println("non reg: [" + sin + "]");
                 s.close();
-                //out.write("q");
-                //out.flush();
                 q = false;
             }
         }

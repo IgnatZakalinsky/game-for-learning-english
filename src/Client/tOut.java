@@ -39,6 +39,7 @@ public class tOut extends Thread { // класс отображающий ист
                         i = Integer.parseInt(ti);
                     } catch (NumberFormatException ne) {
                         System.out.println("--NFE--" + ne);
+                        throw ne;
                     }
 
                     for (int x = 0; x < i; x++) {
@@ -61,7 +62,7 @@ public class tOut extends Thread { // класс отображающий ист
                         }
                     }
                 }
-            } catch (IOException e) {
+            } catch (Exception e) {
                 System.out.println("c in tOut");
                 Cli.connect();
 

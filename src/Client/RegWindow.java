@@ -7,7 +7,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 public class RegWindow extends Frame implements WindowListener, Runnable, ActionListener {
-    TextField tf;
+    TextField tf, tf2;
     Button b;
     Thread t;
     volatile boolean q = true;
@@ -26,6 +26,12 @@ public class RegWindow extends Frame implements WindowListener, Runnable, Action
         tf.setBounds(40, 150, 220, 40);
         tf.setFont(new Font("Lucida Sans Typewriter", Font.PLAIN, 40));
         add(tf);
+        tf2 = new TextField(Cli.setts[2]);
+        tf2.setBounds(40, 90, 220, 50);
+        tf2.setFont(new Font("Lucida Sans Typewriter", Font.PLAIN, 40));
+        add(tf2);
+
+
         b = new Button("connect...");
         b.setBounds(40, 210, 220, 40);
         b.setFont(new Font("Lucida Sans Typewriter", Font.PLAIN, 40));
@@ -87,6 +93,7 @@ public class RegWindow extends Frame implements WindowListener, Runnable, Action
     @Override
     public void actionPerformed(ActionEvent e) {
         Cli.setts[1] = tf.getText();
+        Cli.setts[2] = tf2.getText();
         q = false;
         setVisible(false);
     }
