@@ -5,7 +5,6 @@ public class pressed implements Runnable {
     Thread t;
     GameWindow gw;
     volatile boolean ex = false, ey = false, e_y = false, e_x = false;
-    boolean q = false;
 
     pressed(GameWindow gw) {
         this.gw = gw;
@@ -19,27 +18,23 @@ public class pressed implements Runnable {
             if (!Cli.tryConnect) {
                 if (ey) {
                     GameWindow.y += STEP;
-                    q = true;
+                    Cli.tIn("y");
+                    Cli.tIn(String.valueOf(GameWindow.y));
                 }
                 if (e_y) {
                     GameWindow.y -= STEP;
-                    q = true;
+                    Cli.tIn("y");
+                    Cli.tIn(String.valueOf(GameWindow.y));
                 }
                 if (ex) {
                     GameWindow.x += STEP;
-                    q = true;
+                    Cli.tIn("x");
+                    Cli.tIn(String.valueOf(GameWindow.x));
                 }
                 if (e_x) {
                     GameWindow.x -= STEP;
-                    q = true;
-                }
-
-                if (q) {
                     Cli.tIn("x");
                     Cli.tIn(String.valueOf(GameWindow.x));
-                    Cli.tIn("y");
-                    Cli.tIn(String.valueOf(GameWindow.y));
-                    q = false;
                 }
 
                 try {
